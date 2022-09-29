@@ -26,25 +26,39 @@ import asyncio
         time.sleep(0.3)'''
 
 
-async def blink(canvas, row=5, column=20, symbol='*'):
+async def draw(canvas, row=5, column=20, symbol='*'):
+    canvas.border()
+    curses.curs_set(False)
     while True:
         canvas.addstr(row, column, symbol, curses.A_DIM)
+        canvas.refresh()
+        time.sleep(1)
         await asyncio.sleep(0)
 
         canvas.addstr(row, column, symbol)
+        canvas.refresh()
+        time.sleep(0.3)
         await asyncio.sleep(0)
 
         canvas.addstr(row, column, symbol, curses.A_BOLD)
+        canvas.refresh()
+        time.sleep(0.5)
         await asyncio.sleep(0)
 
         canvas.addstr(row, column, symbol)
+        canvas.refresh()
+        time.sleep(0.3)
         await asyncio.sleep(0)
 
 
 if __name__ == '__main__':
-    coroutine = curses.wrapper(blink)
+    coroutine = curses.wrapper(draw)
 
     while True:
-        coroutine.send(None)
-        curses.update_lines_cols()
+        try:
+            coroutine.send(None)
+            curses.update_lines_cols()
+        except StopIteration:
+            break
+
 
