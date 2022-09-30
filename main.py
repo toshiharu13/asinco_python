@@ -6,12 +6,14 @@ import asyncio
 def draw(canvas):
     canvas.border()
     curses.curs_set(False)
-    row, column = (5, 20)
-    coroutine = blink(canvas, row, column, '* * * * *')
+    row = 5
+    coroutines = [blink(canvas, row, column, '*') for column in range(15, 20)]
     while True:
-        coroutine.send(None)
-        canvas.refresh()
-        time.sleep(1)
+        for coroutine in coroutines:
+            coroutine.send(None)
+            canvas.refresh()
+
+
 
 
 async def blink(canvas, row, column, symbol='*'):
@@ -32,12 +34,4 @@ async def blink(canvas, row, column, symbol='*'):
 if __name__ == '__main__':
     curses.wrapper(draw)
     curses.update_lines_cols()
-
-    '''while True:
-        try:
-            coroutine.send(None)
-            curses.update_lines_cols()
-        except StopIteration:
-            break'''
-
 
