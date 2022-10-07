@@ -10,15 +10,18 @@ def stars_generator(y, x, value=50):
     for star in range(value):
         column = random.randint(1, y-2)
         raw = random.randint(1, x-2)
-        yield column, raw
+        symbol = random.choice(['+', '*', '.', ':'])
+        yield column, raw, symbol
 
 
 def draw(canvas):
     canvas.border()
     curses.curs_set(False)
     y, x = canvas.getmaxyx()
+    #print(*stars_generator(y, x))
+    #time.sleep(5)
 
-    coroutines = [blink(canvas, raw, column) for column, raw in stars_generator(y, x)]
+    coroutines = [blink(canvas, raw, column, symbol) for column, raw, symbol in stars_generator(x, y)]
     while True:
         for coroutine in coroutines:
             coroutine.send(None)
