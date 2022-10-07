@@ -1,15 +1,24 @@
 import time
 import curses
 import asyncio
+import random
 
 TIC_TIMEOUT = 0.1
+
+
+def stars_generator(y, x, value=50):
+    for star in range(value):
+        column = random.randint(1, y-2)
+        raw = random.randint(1, x-2)
+        yield column, raw
 
 
 def draw(canvas):
     canvas.border()
     curses.curs_set(False)
-    row = 5
-    coroutines = [blink(canvas, row, column, '*') for column in range(15, 40, 5)]
+    y, x = canvas.getmaxyx()
+
+    coroutines = [blink(canvas, raw, column) for column, raw in stars_generator(y, x)]
     while True:
         for coroutine in coroutines:
             coroutine.send(None)
