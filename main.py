@@ -7,11 +7,12 @@ def draw(canvas):
     canvas.border()
     curses.curs_set(False)
     row = 5
-    coroutines = [blink(canvas, row, column, '*') for column in range(15, 20)]
+    coroutines = [blink(canvas, row, column, '*') for column in range(15, 40, 5)]
     while True:
         for coroutine in coroutines:
             coroutine.send(None)
             canvas.refresh()
+        time.sleep(0.5)
 
 
 
