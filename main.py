@@ -28,8 +28,13 @@ def draw(canvas):
 
     while True:
         for coroutine in coroutines:
-            coroutine.send(None)
+            try:
+                coroutine.send(None)
+            except StopIteration:
+                coroutines.remove(coroutine)
             canvas.refresh()
+        if len(coroutines) == 0:
+            break
         time.sleep(TIC_TIMEOUT)
 
 
@@ -81,11 +86,11 @@ async def fire(canvas, start_row, start_column, rows_speed=-0.3, columns_speed=0
     symbol = '-' if columns_speed else '|'
 
     rows, columns = canvas.getmaxyx()
-    max_row, max_column = rows - 1, columns - 1
+    max_row, max_column = rows - 2, columns - 1
 
     curses.beep()
 
-    while 0 < row < max_row and 0 < column < max_column:
+    while 1 < row < max_row and 0 < column < max_column:
         canvas.addstr(round(row), round(column), symbol)
         await asyncio.sleep(0)
         canvas.addstr(round(row), round(column), ' ')
