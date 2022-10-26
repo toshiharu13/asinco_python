@@ -4,6 +4,7 @@ import asyncio
 import random
 
 from shut_anime import fire
+from space_ship_fly import ship_fly
 
 TIC_TIMEOUT = 0.1
 
@@ -27,6 +28,7 @@ def draw(canvas):
     shot_start_raw = height - 2
     shot_start_column = width / 2
     coroutines.append(fire(canvas, shot_start_raw, shot_start_column))
+    coroutines.append(ship_fly(canvas))
 
     while True:
         for coroutine in coroutines:
