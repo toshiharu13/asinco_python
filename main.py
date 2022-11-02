@@ -36,9 +36,8 @@ def draw(canvas):
     coroutines = [
         blink(canvas, raw, column, symbol, random.randint(0, 3)) for column, raw, symbol in stars_generator(width, height)
     ]
-    # shot_start_raw = height - 2
-    # shot_start_column = width / 2
-    # coroutines.append(fire(canvas, shot_start_raw, shot_start_column))
+    # TODO add shutting func
+
     coroutines.append(
         ship_fly(canvas, frames, height/2, width/2, height, width))
 
