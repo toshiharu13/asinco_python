@@ -4,7 +4,6 @@ import curses
 import asyncio
 import random
 
-from shut_anime import fire
 from space_ship_fly import ship_fly
 
 TIC_TIMEOUT = 0.1
@@ -26,6 +25,7 @@ def stars_generator(width, height, value=50):
 def draw(canvas):
     canvas.border()
     curses.curs_set(False)
+    canvas.nodelay(True)
     height, width = canvas.getmaxyx()
     frame_1_path = pathlib.Path.cwd()/'frames'/'rocket_frame_1.txt'
     frame_2_path = pathlib.Path.cwd() / 'frames' / 'rocket_frame_2.txt'
@@ -39,7 +39,8 @@ def draw(canvas):
     # shot_start_raw = height - 2
     # shot_start_column = width / 2
     # coroutines.append(fire(canvas, shot_start_raw, shot_start_column))
-    coroutines.append(ship_fly(canvas, frames, height/2, width/2))
+    coroutines.append(
+        ship_fly(canvas, frames, height/2, width/2, height, width))
 
     while True:
         for coroutine in coroutines:
@@ -81,12 +82,8 @@ async def blink(canvas, row, column, symbol='*', offset=0):
             for tic in range(3):
                 await asyncio.sleep(0)
             offset = add_offset(offset)
-            
-
-
 
 
 if __name__ == '__main__':
     curses.wrapper(draw)
     curses.update_lines_cols()
-
