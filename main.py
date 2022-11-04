@@ -4,7 +4,7 @@ import curses
 import asyncio
 import random
 
-from space_ship_fly import ship_fly
+from space_ship_fly import get_ship_fly
 
 TIC_TIMEOUT = 0.1
 
@@ -39,7 +39,7 @@ def draw(canvas):
     # TODO add shutting func
 
     coroutines.append(
-        ship_fly(canvas, frames, height/2, width/2, height, width))
+        get_ship_fly(canvas, frames, height / 2, width / 2, height, width))
 
     while True:
         for coroutine in coroutines:

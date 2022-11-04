@@ -1,4 +1,4 @@
-HANDLE_CODE = {
+CONTROL_CODES = {
     'SPACE_KEY_CODE': 32,
     'LEFT_KEY_CODE': 260,
     'RIGHT_KEY_CODE': 261,
@@ -19,19 +19,19 @@ def read_controls(canvas):
         if pressed_key_code == -1:
             break
 
-        if pressed_key_code == HANDLE_CODE['UP_KEY_CODE']:
+        if pressed_key_code == CONTROL_CODES['UP_KEY_CODE']:
             rows_direction = -1
 
-        if pressed_key_code == HANDLE_CODE['DOWN_KEY_CODE']:
+        if pressed_key_code == CONTROL_CODES['DOWN_KEY_CODE']:
             rows_direction = 1
 
-        if pressed_key_code == HANDLE_CODE['RIGHT_KEY_CODE']:
+        if pressed_key_code == CONTROL_CODES['RIGHT_KEY_CODE']:
             columns_direction = 1
 
-        if pressed_key_code == HANDLE_CODE['LEFT_KEY_CODE']:
+        if pressed_key_code == CONTROL_CODES['LEFT_KEY_CODE']:
             columns_direction = -1
 
-        if pressed_key_code == HANDLE_CODE['SPACE_KEY_CODE']:
+        if pressed_key_code == CONTROL_CODES['SPACE_KEY_CODE']:
             space_pressed = True
 
     return rows_direction, columns_direction, space_pressed
