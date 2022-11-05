@@ -24,7 +24,6 @@ async def get_ship_fly(
 
         draw_frame(canvas, location_y, location_x, current_frame)
 
-        #for tic in range(2):
         await asyncio.sleep(0)
 
         draw_frame(canvas, location_y, location_x, current_frame, negative=True)

@@ -3,14 +3,17 @@ import time
 import curses
 import asyncio
 import random
+import os
 
 from space_ship_fly import get_ship_fly
 
 TIC_TIMEOUT = 0.1
+FRAMES_FOLDER = 'frames'
 
 
-def get_frame_from_file(file):
-    with open(file, 'r') as file:
+def get_frame_from_file(file_name, frame_folder):
+    frame_file = os.path.join(frame_folder, file_name)
+    with open(frame_file, 'r') as file:
         return file.read()
 
 
@@ -27,11 +30,9 @@ def draw(canvas):
     curses.curs_set(False)
     canvas.nodelay(True)
     height, width = canvas.getmaxyx()
-    frame_1_path = pathlib.Path.cwd()/'frames'/'rocket_frame_1.txt'
-    frame_2_path = pathlib.Path.cwd() / 'frames' / 'rocket_frame_2.txt'
-    frame_1 = get_frame_from_file(frame_1_path)
-    frame_2 = get_frame_from_file(frame_2_path)
-    frames = (frame_1, frame_2)
+
+    frames_filenames = os.listdir(FRAMES_FOLDER)
+    frames = (get_frame_from_file(frame_filename, FRAMES_FOLDER) for frame_filename in frames_filenames)
 
     coroutines = [
         blink(canvas, raw, column, symbol, random.randint(0, 3)) for column, raw, symbol in stars_generator(width, height)
