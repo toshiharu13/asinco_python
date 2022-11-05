@@ -48,8 +48,7 @@ def draw(canvas):
             except StopIteration:
                 coroutines.remove(coroutine)
             canvas.refresh()
-        if len(coroutines) == 0:
-            break
+
         time.sleep(TIC_TIMEOUT)
 
 
