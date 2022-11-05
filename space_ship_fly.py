@@ -23,7 +23,6 @@ async def get_ship_fly(
         location_x = max(location_x, ship_field_y_min)
 
         draw_frame(canvas, location_y, location_x, current_frame)
-        canvas.refresh()
 
         for tic in range(2):
             await asyncio.sleep(0)
