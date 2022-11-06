@@ -1,9 +1,8 @@
-import pathlib
-import time
-import curses
 import asyncio
-import random
+import curses
 import os
+import random
+import time
 
 from space_ship_fly import get_ship_fly
 

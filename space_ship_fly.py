@@ -1,7 +1,7 @@
 import asyncio
 import itertools
 
-from curses_tools import draw_frame, read_controls, get_frame_size
+from curses_tools import draw_frame, get_frame_size, read_controls
 
 
 async def get_ship_fly(
