@@ -43,7 +43,7 @@ def draw(canvas):
         get_ship_fly(canvas, frames, height / 2, width / 2, height, width))
 
     while True:
-        for coroutine in coroutines:
+        for coroutine in coroutines.copy():
             try:
                 coroutine.send(None)
             except StopIteration:
