@@ -4,7 +4,7 @@ import os
 import random
 import time
 
-from space_ship_fly import Animate_spaceship
+from space_ship_fly import animate_spaceship
 
 TIC_TIMEOUT = 0.1
 FRAMES_FOLDER = 'frames'
@@ -39,7 +39,7 @@ def draw(canvas):
     # TODO add shutting func
 
     coroutines.append(
-        Animate_spaceship(canvas, frames, height / 2, width / 2, height, width))
+        animate_spaceship(canvas, frames, height / 2, width / 2, height, width))
 
     while True:
         for coroutine in coroutines.copy():
